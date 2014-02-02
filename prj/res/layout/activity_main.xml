@@ -1,14 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/splash"
     android:orientation="vertical"
     android:weightSum="1" >
-
-    <!-- Email Label -->
-    <!-- Password Label -->
-    <!-- Register Button -->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,34 +16,36 @@
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/usu"
+            android:id="@+id/user"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Ususario"
+            android:hint="@string/user"
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/reg_password"
+            android:id="@+id/pass"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Contraseña"
-            android:password="true"
+            android:hint="@string/pass"
+            android:inputType="textPassword"
             android:singleLine="true" />
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Login" />
+            android:text="@string/login" 
+            />
 
         <TextView
+            android:id="@+id/register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:text="Registrate"
+            android:text="@string/register"
             android:textColor="#392c94" />
     </LinearLayout>
 
