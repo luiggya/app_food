@@ -36,11 +36,13 @@ public class Register extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.registro);
+		_sharedInstance=this;
+		AsyncHTTPTask.setContext(Register.instance());
 		user = (EditText) findViewById(R.id.user);
 		pass = (EditText) findViewById(R.id.pass);
-//		ruc = (EditText) findViewById(R.id.ruc);
-//		name = (EditText) findViewById(R.id.name);
+		ruc = (EditText) findViewById(R.id.ruc);
+		name = (EditText) findViewById(R.id.name);
 		login = (TextView) findViewById(R.id.login);
 		login.setOnClickListener(new OnClickListener() {
 			@Override
@@ -58,11 +60,11 @@ public class Register extends Activity {
 				JSONObject data = new JSONObject();
 				try {
 					data.put("user", user.getText());
-					data.put("password", pass.getText());
+					data.put("contrasena", pass.getText());
 					data.put("name", name.getText());
 					data.put("ruc", ruc.getText());
 					params.put("data", data);
-					params.put("request", "register");
+					params.put("request", "registro");
 					new AsyncHTTPTask().execute(new JSONObject[]{params});
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

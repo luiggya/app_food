@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		_sharedInstance=this;
 		user = (EditText) findViewById(R.id.user);
 		pass = (EditText) findViewById(R.id.pass);
 		register = (TextView) findViewById(R.id.register);
@@ -55,7 +56,7 @@ public class MainActivity extends Activity {
 				JSONObject data = new JSONObject();
 				try {
 					data.put("user", user.getText());
-					data.put("password", pass.getText());
+					data.put("contrasena", pass.getText());
 					params.put("data", data);
 					params.put("request", "login");
 					new AsyncHTTPTask().execute(new JSONObject[]{params});

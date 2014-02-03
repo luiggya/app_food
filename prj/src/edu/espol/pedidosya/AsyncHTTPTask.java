@@ -62,18 +62,15 @@ public class AsyncHTTPTask extends AsyncTask<JSONObject, Void, HttpResponse> {
 
 		try {
 		    Log.d("AsyncHTTPTask - doInBackground", "creando un request post");
-		    HttpRequestBase request = new HttpPost("http://api.jigl.com");
+		    HttpRequestBase request = new HttpPost("http://192.168.1.4:8888/pedidosya-api/");
 		    MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 	        multipartEntity.addPart("data", new StringBody(params[0].toString()));
 	        ((HttpPost) request).setEntity(multipartEntity);
 
 		    Log.d("AsyncHTTPTask - doInBackground", "definido request: " +request);
-
-		    synchronized (this) {
-		        // store request. It then can be used for terminating this
-		        // construction operation.
-		    	jsonRequest = params[0];
-		    }
+		    
+		    jsonRequest = params[0];
+		    
 		    Log.d("AsyncHTTPTask - doInBackground", "Json enviado: "+params[0].toString());
 		    response = client.execute(request);
 		    Log.d("AsyncHTTPTask - doInBackground", "recogiendo Response: "+response.getEntity());
@@ -99,20 +96,20 @@ public class AsyncHTTPTask extends AsyncTask<JSONObject, Void, HttpResponse> {
 			Log.d("AsyncHTTPTask - onPostExecute", "recogiendo respuesta del server: "+respStr);
 			JSONObject response = new JSONObject(respStr);
 			switch (response.getInt("error")) {
-			case 101:
-				ResponseManager.instance().error(response.getString("descriptionerror"), context);
-				break;
-			default:
+			case 0:
 				if(jsonRequest.getString("request").equals("login")){
 					Log.d("AsyncHTTPTask - onPostExecute", "login-JsonObject: "+response.getString("data"));
 					ResponseManager.instance().login(response.getJSONObject("data"));
-				}else if(jsonRequest.getString("request").equals("login")){
-					Log.d("AsyncHTTPTask - onPostExecute", "register-JsonObject: "+response.getString("data"));
-					ResponseManager.instance().register(response.getJSONObject("data"));
+				}else if(jsonRequest.getString("request").equals("registro")){
+					Log.d("AsyncHTTPTask - onPostExecute", "register-JsonObject: "+jsonRequest.getJSONObject("data"));
+					ResponseManager.instance().register(jsonRequest.getJSONObject("data"));
 				}else if(jsonRequest.getString("request").equals("platos")){
 					Log.d("AsyncHTTPTask - onPostExecute", "platos-JsonObject: "+response.getString("data"));
 					ResponseManager.instance().platos(response.getJSONArray("data"));
 				}
+				break;
+			default:
+				ResponseManager.instance().error(response.getString("descriptionerror"), context);
 				break;
 			}
 		} catch (JSONException e) {
@@ -128,8 +125,7 @@ public class AsyncHTTPTask extends AsyncTask<JSONObject, Void, HttpResponse> {
 		
 	}
 	
-	@SuppressWarnings("static-access")
-	public void setContext(Context context){
-		this.context=context;
+	public static void setContext(Context c){
+		context=c;
 	}
 }

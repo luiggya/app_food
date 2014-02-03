@@ -35,9 +35,11 @@ public class Main extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-//		platos = (ListView) findViewById(R.id.lista);
-//		doPedido = (Button) findViewById(R.id.pedido);
+		setContentView(R.layout.main);
+		_sharedInstance=this;
+		AsyncHTTPTask.setContext(Main.instance());
+		platos = (ListView) findViewById(R.id.lista);
+		doPedido = (Button) findViewById(R.id.pedido);
 		doPedido.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@layout/background"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/lista"
+            android:layout_width="150dp"
+            android:layout_height="182dp"
+            android:layout_marginTop="105dp"
+            android:layout_weight="0.96" >
+        </ListView>
+
+        <Button
+            android:id="@+id/pedido"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Hacer pedido" />
+    </LinearLayout>
+
+</RelativeLayout>
